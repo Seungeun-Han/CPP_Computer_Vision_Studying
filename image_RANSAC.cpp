@@ -1,3 +1,5 @@
+// Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 #include <stdlib.h>
 #include <ctime>
@@ -90,7 +92,7 @@ int main() {
 					eq_table[label_count] = label_count;
 					continue;
 				}
-				else if (i == 0 && j != 0) {  //0Çà
+				else if (i == 0 && j != 0) {  //0í–‰
 					if (otsu.at<uchar>(i, j - 1) > 0) {
 						result.at<float>(i, j) = result.at<float>(i, j - 1);
 						continue;
@@ -102,7 +104,7 @@ int main() {
 						continue;
 					}
 				}
-				else if (i != 0 && j == 0) {  //0¿­
+				else if (i != 0 && j == 0) {  //0ì—´
 					if (otsu.at<uchar>(i - 1, j) > 0) {
 						result.at<float>(i, j) = result.at<float>(i - 1, j);
 						continue;
@@ -121,7 +123,7 @@ int main() {
 						result.at<float>(i, j) = label_count;
 						eq_table[label_count] = label_count;
 					}
-					else {  //±× ¿Ü
+					else {  //ê·¸ ì™¸
 						float values[3] = { 0, };
 						int n = 0;
 						if (otsu.at<uchar>(i - 1, j) > 0) {
@@ -161,7 +163,7 @@ int main() {
 					continue;
 				}
 
-				//¼­, ºÏ¼­, ºÏ, ºÏµ¿ ´Ù ¾øÀ» ¶§
+				//ì„œ, ë¶ì„œ, ë¶, ë¶ë™ ë‹¤ ì—†ì„ ë•Œ
 				if ((i != 0 && j != 0) && otsu.at<uchar>(i - 1, j) == 0
 					&& otsu.at<uchar>(i, j - 1) == 0 && otsu.at<uchar>(i - 1, j - 1) == 0
 					&& otsu.at<uchar>(i - 1, j + 1) == 0) {
@@ -169,7 +171,7 @@ int main() {
 					result.at<float>(i, j) = label_count;
 					eq_table[label_count] = label_count;
 				}
-				else {  //±× ¿Ü
+				else {  //ê·¸ ì™¸
 					float values[4] = { 0, };
 					int n = 0;
 					if (otsu.at<uchar>(i - 1, j) > 0) {
@@ -218,7 +220,7 @@ int main() {
 		}
 	}
 
-	/*eq table Á¤¸®*/
+	/*eq table ì •ë¦¬*/
 	for (int i = 1; i <= label_count; i++) {
 		int n = i;
 		while (eq_table[n] != n) {
@@ -227,7 +229,7 @@ int main() {
 		eq_table[i] = n;
 	}
 
-	/*º¯°æµÈ eq_tableÀ» ÀÌ¿ëÇÏ¿© ´Ù½Ã labeling*/
+	/*ë³€ê²½ëœ eq_tableì„ ì´ìš©í•˜ì—¬ ë‹¤ì‹œ labeling*/
 	for (int k = 1; k <= label_count; k++) {
 		for (int i = 0; i < image.rows; i++) {
 			for (int j = 0; j < image.cols; j++) {
@@ -259,7 +261,7 @@ int main() {
 		cout << i << ": " << labels[i] << endl;
 	}*/
 
-	/*1ºÎÅÍ ´Ù½Ã labeling*/
+	/*1ë¶€í„° ë‹¤ì‹œ labeling*/
 	for (int k = 1; k <= l_count; k++) {
 		for (int i = 0; i < image.rows; i++) {
 			for (int j = 0; j < image.cols; j++) {
@@ -308,12 +310,12 @@ int main() {
 		}
 	}
 
-	int iter = 5000; //¹İº¹ È½¼ö  1000, 3000, 5000
+	int iter = 5000; //ë°˜ë³µ íšŸìˆ˜  1000, 3000, 5000
 	double t = 1.0;
-	int d = 50; //ÀÎ¶óÀÌ¾î ÁıÇÕÀÇ Å©±â
-	int e = 1; //Á÷¼± ÀûÇÕ ¿ÀÂ÷
+	int d = 50; //ì¸ë¼ì´ì–´ ì§‘í•©ì˜ í¬ê¸°
+	int e = 1; //ì§ì„  ì í•© ì˜¤ì°¨
 	for (int k = 1; k <= l_count; k++) {
-		if (area[k] >= 300) {// ·¹ÀÌºí ¿ø¼Ò °³¼ö°¡ 300°³ ÀÌ»óÀÎ °Í¸¸
+		if (area[k] >= 300) {// ë ˆì´ë¸” ì›ì†Œ ê°œìˆ˜ê°€ 300ê°œ ì´ìƒì¸ ê²ƒë§Œ
 			int* p = stats.ptr<int>(k);
 			Rect rect(p[0], p[1], p[2], p[3]);
 			Mat crop = otsu(rect);
@@ -373,7 +375,7 @@ int main() {
 					}
 				}
 				
-				if (inliner_count >= max) {  //ÁıÇÕ inliner°¡ max°³ ÀÌ»óÀÇ »ùÇÃÀ» °¡Áö¸é
+				if (inliner_count >= max) {  //ì§‘í•© inlinerê°€ maxê°œ ì´ìƒì˜ ìƒ˜í”Œì„ ê°€ì§€ë©´
 					Mat A(inliner_count, 2, CV_32F, Scalar(1));
 					for (int i = 0; i < inliner_count; i++) {
 						A.at<float>(i, 0) = inliner[i][0];
@@ -400,9 +402,9 @@ int main() {
 			float a = line_info[0];
 			float b = line_info[1];
 			cout << "\n";
-			cout << "°è»ê °á°ú" << endl;
+			cout << "ê³„ì‚° ê²°ê³¼" << endl;
 			cout << "a: " << a << ", b: " << b << endl;
-			cout << "µû¶ó¼­ label "<< k << " ¿¡¼­ y = " << a << "x + (" << b << ") Á÷¼± °ËÃâ" << endl;
+			cout << "ë”°ë¼ì„œ label "<< k << " ì—ì„œ y = " << a << "x + (" << b << ") ì§ì„  ê²€ì¶œ" << endl;
 
 			if (a > -1 && a < 0.96) {
 				//srand((unsigned int)time(NULL));
