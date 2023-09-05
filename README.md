@@ -19,6 +19,7 @@ RANSAC, Hough, PCA, SIFT 등 중요한 알고리즘을 이해하고, 구현하�
 ## Table of Contents
 - [RANSAC](#RANSAC)
 - [Hough_Transform](#Hough_Transform)
+- [SIFT](#SIFT)
 - [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
 - [Otsu_이진화](#Otsu_이진화)
 - [DFT(Discrete Fourier Transform), 이산 푸리에 변환](#DFT)
@@ -150,6 +151,52 @@ input image는 고속도로 이미지입니다. 우리는 허프 변환을 통�
 #### Top 10
 
 ![top10](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/9664cd15-5db5-4695-bd42-3b3094f3fd63)
+
+<br>
+
+<hr>
+
+# SIFT
+- 코드:
+  [sift_rcv.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/sift_rcv.cpp)
+
+해리스 코너는 회전 불변하나, 스케일 불변은 아니었습니다. 따라서 **스케일에 불변한 특징점 검출**이 필요했습니다.
+
+이로부터 다중 스케일 영상 구축 알고리즘인 __SIFT, SURF__ 가 등장했습니다.
+
+## SIFT란?
+SIFT(Scale-Invariant Feature Transform)는 이미지의 크기와 회전에 불변하는 특징을 추출하는 알고리즘입니다.
+
+알고리즘은 다음과 같은 순서로 진행됩니다.
+
+```
+1. 가우시안 피라미드 생성
+2. DOG 피라미드 생성
+3. 극점 검출
+4. 약한 극점 제거하고, 나머지를 키포인트(특징점)로 삼음
+5. 키포인트  orientation(방향) 계산
+6. 키포인트 descriptors(기술자) 계산
+```
+
+<br>
+
+### Example
+SIFT 알고리즘을 구현하고, 그 결과를 Opencv 내장 함수와 비교하였습니다.
+
+#### input Image
+
+![box](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/4e817f71-f4a1-4a18-ab3a-d0f5645c98eb)
+
+#### My Output Image
+
+![SIFT_hse](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/dff0f065-4c6f-4d0f-9edd-6bb21bfee120)
+
+#### OpenCV Output Image
+
+![cv_library](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/c5c666bf-8ee5-43d3-a950-3a400600bc28)
+
+두 결과가 비슷한 것으로 보아 알고리즘 구현이 잘 되었다고 볼 수 있겠습니다.
+
 
 <br>
 
