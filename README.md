@@ -78,12 +78,13 @@ input image는 고속도로 이미지입니다. 우리는 허프 변환을 통�
 
 ![top10](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/9664cd15-5db5-4695-bd42-3b3094f3fd63)
 
+<br>
 
 <hr>
 
 # Labeling_using_EQ_Table
 - 코드:
-  [Labeling_using_EQ_Table.cpp][([https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/hough.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/labeling.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/Labeling_using_EQ_Table.cpp))
+  [Labeling_using_EQ_Table.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/Labeling_using_EQ_Table.cpp)
 
 입력 이미지에서 자동적으로 segment들(나눠진 부분들)을 찾아 각각 다른 레이블을 붙이는 알고리즘입니다.
 
