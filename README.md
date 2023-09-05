@@ -19,7 +19,7 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 ## Table of Contents
 - [Hough_Transform](#Hough_Transform)
 - [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
-- [Training](#training)
+- [Otsu_이진화](#Otsu_이진화)
 - [Inference](#inference)
 - [Results](#results)
 - [Authors](#authors)
@@ -104,5 +104,51 @@ EQ Table을 이용해 한글의 각 자음 모음을 자동으로 segment하고,
 #### Output Image
 
 ![tmp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/ca976fc9-8177-4141-b8d6-17fbb7490068)
+
+<br>
+
+<hr>
+
+# Otsu_이진화
+- 코드:
+  [otsu.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/Labeling_using_EQ_Table.cpp)
+
+Otsu 알고리즘을 직접 구현하여 자동으로 이진화 threshold를 찾고, 이진화하는 알고리즘입니다.
+
+<br>
+
+### Example
+0~255까지 밝기 구간 별로 나누어진 이미지가 들어갔을 때, 이진화 threshold를 자동으로 찾고 이진화 한 결과입니다.
+
+#### input Image
+
+![bright](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/4ab53fb5-6a64-485c-be40-a094e041dbbc)
+
+
+#### Output Image
+
+![otsu](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/d72a05df-1dc1-4d62-9590-6f0819827916)
+
+<br>
+
+# Otsu_삼진화
+- 코드:
+  [otsu_2thres.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/Labeling_using_EQ_Table.cpp)
+
+Otsu 알고리즘을 직접 구현하여 자동으로 2 개의 threshold를 찾고, 삼진화하는 알고리즘입니다.
+
+<br>
+
+### Example
+0~255까지 밝기 구간 별로 나누어진 이미지가 들어갔을 때, 2 개의 threshold를 자동으로 찾고 삼진화 한 결과입니다.
+
+#### input Image
+
+![bright](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/4ab53fb5-6a64-485c-be40-a094e041dbbc)
+
+
+#### Output Image
+
+![result](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/b4e8670c-d42d-4753-a5e7-3b3f2570e825)
 
 
