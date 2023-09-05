@@ -21,7 +21,7 @@ Hough, RANSAC, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능
 - [Hough_Transform](#Hough_Transform)
 - [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
 - [Otsu_이진화](#Otsu_이진화)
-- [DFT](#DFT(Discrete Fourier Transform)_이산_푸리에_변환)
+- [DFT](#DFT\(Discrete Fourier Transform\)_이산_푸리에_변환)
 - [Authors](#authors)
 
 <br>
