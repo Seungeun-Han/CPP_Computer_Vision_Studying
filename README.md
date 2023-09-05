@@ -30,9 +30,11 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
   [hough.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/hough.cpp)
 
 ## Hough Transform(허프 변환) 이란?
-허프변환은 이미지에서 모양을 찾는 가장 유명한 방법입니다. 
+허프 변환은 이미지에서 모양을 찾는 가장 유명한 방법입니다. 
 
 이 방법을 이용하면 이미지의 형태를 찾거나, 누락되거나 깨진 영역을 복원할 수 있습니다.
+
+이 코드에서는 허프 변환을 이용하여 __원하는 기울기__의 직선을 검출합니다.
 
 <br>
 
@@ -44,16 +46,34 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 
 <br>
 
-### 허프 변환에 대한 참고자료
+#### 허프 변환에 대한 참고자료
 - [ENG](https://docs.opencv.org/3.4/d9/db0/tutorial_hough_lines.html)
 - [KOR](https://opencv-python.readthedocs.io/en/latest/doc/25.imageHoughLineTransform/imageHoughLineTransform.html)
 
 <br>
 
-- input image
+### Example
+input image는 고속도로 이미지입니다. 우리는 허프 변환을 통해 이미지에서 고속도로의 실선 부분을 찾길 원합니다.
+
+고속도로의 실선 부분은 직선의 기울기가 0~50도, 120~140도에 있습니다.
+
+우리는 허프 변환을 이용하여 기울기가 0~50도, 120~140도인 직선을 검출하고, 그 중에서 가장 유력한 10개의 직선을 찾길 원합니다.
+
+#### input Image
 
 ![highway](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/4a031ee1-3021-4dd4-96f4-27cdbf42a9e8)
 
+우리의 허프 변환 코드를 실행시키면, 우선 아래의 사진과 같이 모든 직선을 검출할 수 있습니다.
 
-- 
+#### All Lines
+
+![all_the_lines](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/7ba6970c-8eb3-4ccb-9e68-926f03c04d0f)
+
+이 중에서 직선의 기울기가 0~50도, 120~140도 이며, 가장 유력한 10개를 찾은 결과는 아래와 같습니다.
+
+#### Top 10
+
+![top10](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/9664cd15-5db5-4695-bd42-3b3094f3fd63)
+
+
 
