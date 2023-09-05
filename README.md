@@ -14,7 +14,7 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 대표적인 알고리즘에 대한 목차는 다음과 같습니다.
 
 ## Table of Contents
-- [Hough 변환](#Hough 변환)
+- [Hough_Transform](#Hough_Transform)
 - [Data](#data)
 - [Training](#training)
 - [Inference](#inference)
@@ -23,7 +23,7 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 
 <hr>
 
-# Hough 변환
+# Hough_Transform
 hough.cpp
 
 
