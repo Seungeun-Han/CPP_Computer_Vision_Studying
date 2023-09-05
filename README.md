@@ -21,7 +21,7 @@ Hough, RANSAC, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능
 - [Hough_Transform](#Hough_Transform)
 - [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
 - [Otsu_이진화](#Otsu_이진화)
-- [DFT](#DFT(Discrete Fourier Transform) 이산 푸리에 변환)
+- [DFT](#DFT(Discrete Fourier Transform)_이산_푸리에_변환)
 - [Authors](#authors)
 
 <br>
@@ -231,7 +231,7 @@ Otsu 알고리즘을 직접 구현하여 자동으로 2 개의 threshold를 찾�
 
 <hr>
 
-# DFT(Discrete Fourier Transform) 이산 푸리에 변환 
+# DFT(Discrete Fourier Transform)_이산_푸리에_변환 
 - 코드:
   [otsu.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/otsu.cpp)
 
