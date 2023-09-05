@@ -1,3 +1,5 @@
+// Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <algorithm>
@@ -40,13 +42,13 @@ int main() {
 	avgImage.convertTo(avgImage, CV_8UC1);
 	imwrite("avg.jpg", avgImage);*/
 
-	// ¿øÁ¡ Áß½ÉÀ¸·Î (¿øº»¿µ»ó - Æò±Õ¿µ»ó)
+	// ì›ì  ì¤‘ì‹¬ìœ¼ë¡œ (ì›ë³¸ì˜ìƒ - í‰ê· ì˜ìƒ)
 	for (int i = 0; i < 10; i++) {
 		imageSet[i] = imageSet[i] - avgImage;
 	}
 	//cout << imageSet[5] << endl;
 
-	// °øºĞ»ê Çà·Ä
+	// ê³µë¶„ì‚° í–‰ë ¬
 	Mat covariance;
 	calcCovarMatrix(imageSet, covariance, avgImage, COVAR_ROWS, CV_32FC1);
 	//calcCovarMatrix(imageSet, covariance, avgImage, COVAR_NORMAL, CV_32FC1);
@@ -55,7 +57,7 @@ int main() {
 	//cout << covariance<< endl;
 	cout << endl;
 
-	// °íÀ¯°ª, °íÀ¯º¤ÅÍ
+	// ê³ ìœ ê°’, ê³ ìœ ë²¡í„°
 	Mat eigenvalues, eigenvectors;
 	eigen(covariance, eigenvalues, eigenvectors);
 	cout << eigenvalues.size() << endl;
