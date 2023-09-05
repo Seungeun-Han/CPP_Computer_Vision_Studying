@@ -22,6 +22,7 @@ RANSAC, Hough, PCA, SIFT 등 중요한 알고리즘을 이해하고, 구현하�
 - [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
 - [Otsu_이진화](#Otsu_이진화)
 - [DFT(Discrete Fourier Transform), 이산 푸리에 변환](#DFT)
+- [고주파, 저주파 필터링](#FFT_Filtering)
 - [PCA](#PCA)
 
 <br>
@@ -299,13 +300,58 @@ PCA를 이용하여 3개의 고유 얼굴(Eigenface)을 구하는 예시는 다�
 
 ![rank3](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/957531b2-f0a7-459e-9291-cf5b2ef0a7e6)
 
+<br>
+
+<hr>
+
+# FFT_Filtering
+- 코드:
+  [fft_filtering.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/fft_filtering.cpp)
+
+푸리에 변환을 이용여 고주파수 영역 혹은 저주파수 영역의 값을 제거 후, 역변환하여 주파수를 필터링하는 알고리즘입니다.
+
+이에 대한 자세한 설명은 아래 블로그에 명시하였습니다.
+
+#### 주파수 영역 필터링에 대한 참고 자료
+- https://hsyaloe.tistory.com/33
+
+<br>
+
+### Example
+입력 영상을 푸리에 변환하여 주파수 영역으로 변환 후, 고주파 혹은 저주파 영역을 제거하고 이를 다시 역변환하는 예시입니다.
+
+#### input Image
+
+![Lenna](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/441e61ee-d1ca-4162-bb41-bbdfe2aac2e7)
+
+
+#### 주파수 영역 이미지
+
+![dft](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/b75241e2-f66c-448d-abd7-a41291a90ad9)
+
+#### 고주파수 필터링 마스크
+
+![highpass_filter](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/9e711d4b-30ba-40e8-b974-076bf3d105a1)
+
+
+#### 고주파수 필터링 역변환 이미지
+
+![high_passed_img](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/263ef3ae-4cfc-4f3c-9e46-97a6aae64856)
+
+
+#### 저주파수 필터링 마스크
+
+![lowpass_filter](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/7b9be849-07be-40ce-8f96-80309293929b)
+
+
+#### 저주파수 필터링 역변환 이미지
+
+![low_passed_img](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/1cf03c7e-5bdd-4b42-abad-f5560dbb70e6)
 
 
 <br>
 
 <hr>
-
-
 
 
 
