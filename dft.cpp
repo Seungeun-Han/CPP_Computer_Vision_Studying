@@ -1,67 +1,69 @@
+# Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 using namespace std;
 using namespace cv;
 
-void log_mag(Mat complex, Mat& dst) { //Çª¸®¿¡ º¯È¯À» ¼öÇàÇÏ¸é º¹¼Ò¼öÀÇ Çà·ÄÀÌ °á°ú·Î »ı¼º
-	Mat planes[2]; //º¹¼Ò¼öÀÇ ½Ç¼öºÎ¿Í Çã¼öºÎ¸¦ º¤ÅÍ·Î °£ÁÖ
-	split(complex, planes); //2Ã¤³Î Çà·Ä ºĞ¸®
-	magnitude(planes[0], planes[1], dst); //º¤ÅÍÀÇ Å©±â
+void log_mag(Mat complex, Mat& dst) { //í‘¸ë¦¬ì— ë³€í™˜ì„ ìˆ˜í–‰í•˜ë©´ ë³µì†Œìˆ˜ì˜ í–‰ë ¬ì´ ê²°ê³¼ë¡œ ìƒì„±
+	Mat planes[2]; //ë³µì†Œìˆ˜ì˜ ì‹¤ìˆ˜ë¶€ì™€ í—ˆìˆ˜ë¶€ë¥¼ ë²¡í„°ë¡œ ê°„ì£¼
+	split(complex, planes); //2ì±„ë„ í–‰ë ¬ ë¶„ë¦¬
+	magnitude(planes[0], planes[1], dst); //ë²¡í„°ì˜ í¬ê¸°
 	log(dst + 1, dst);
-	normalize(dst, dst, 0, 255, NORM_MINMAX); //Á¤±ÔÈ­(ÀúÁÖÆÄ ¿µ¿ª°ú °íÁÖÆÄ ¿µ¿ªÀÇ °è¼ö°ªÀ» Á¤±ÔÈ­)
+	normalize(dst, dst, 0, 255, NORM_MINMAX); //ì •ê·œí™”(ì €ì£¼íŒŒ ì˜ì—­ê³¼ ê³ ì£¼íŒŒ ì˜ì—­ì˜ ê³„ìˆ˜ê°’ì„ ì •ê·œí™”)
 	dst.convertTo(dst, CV_8U);
 }
 
 void shuffling(Mat mag_img, Mat& dst) {
 	int cx = mag_img.cols / 2;
 	int cy = mag_img.rows / 2;
-	Rect q1(cx, 0, cx, cy); //1»çºĞ¸é
+	Rect q1(cx, 0, cx, cy); //1ì‚¬ë¶„ë©´
 	Rect q2(0, 0, cx, cy); //2
 	Rect q3(0, cy, cx, cy); //3
 	Rect q4(cx, cy, cx, cy); //4
 
 	dst = Mat(mag_img.size(), mag_img.type());
-	mag_img(q1).copyTo(dst(q3)); //»çºĞ¸é ¸Â¹Ù²Ş
+	mag_img(q1).copyTo(dst(q3)); //ì‚¬ë¶„ë©´ ë§ë°”ê¿ˆ
 	mag_img(q3).copyTo(dst(q1));
 	mag_img(q2).copyTo(dst(q4));
 	mag_img(q4).copyTo(dst(q2));
 }
 
-Mat DFT_1D(Mat row, int dir) { //1Â÷¿ø ½ÅÈ£ÀÇ ÀÌ»ê Çª¸®¿¡ º¯È¯
+Mat DFT_1D(Mat row, int dir) { //1ì°¨ì› ì‹ í˜¸ì˜ ì´ì‚° í‘¸ë¦¬ì— ë³€í™˜
 	int n = row.cols;
 	Mat dst(row.size(), CV_32FC2);
 
 	for (int i = 0; i < n; i++) {
 		Vec2f complex(0, 0);
 		for (int j = 0; j < n; j++) {
-			float theta = dir * (-2) * CV_PI * i * j / n; //±âÀúÇÔ¼ö °¢µµ °è»ê
+			float theta = dir * (-2) * CV_PI * i * j / n; //ê¸°ì €í•¨ìˆ˜ ê°ë„ ê³„ì‚°
 			Vec2f value = row.at<Vec2f>(j);
 			complex[0] += value[0] * cos(theta) - value[1] * sin(theta);
 			complex[1] += value[1] * cos(theta) + value[0] * sin(theta);
 		}
-		dst.at<Vec2f>(i) = complex;  //ÇÑ ¿ø¼ÒÀÇ DFT °è»ê °á°ú ÀúÀå
+		dst.at<Vec2f>(i) = complex;  //í•œ ì›ì†Œì˜ DFT ê³„ì‚° ê²°ê³¼ ì €ì¥
 	}
 
-	if (dir == -1) { //-1ÀÌ¸é ¿ªº¯È¯
+	if (dir == -1) { //-1ì´ë©´ ì—­ë³€í™˜
 		dst /= n;
 	}
 
 	return dst;
 }
 
-void DFT_2D(Mat complex, Mat& dst, int dir) { //2Â÷¿ø ½ÅÈ£ Çª¸®¿¡ º¯È¯
+void DFT_2D(Mat complex, Mat& dst, int dir) { //2ì°¨ì› ì‹ í˜¸ í‘¸ë¦¬ì— ë³€í™˜
 	complex.convertTo(complex, CV_32F);
 	Mat tmp(complex.size(), CV_32FC2, Vec2f(0, 0));
 	tmp.copyTo(dst);
 
-	for (int i = 0; i < complex.rows; i++){  //°¡·Î ¹æÇâ Çª¸®¿¡ º¯È¯
+	for (int i = 0; i < complex.rows; i++){  //ê°€ë¡œ ë°©í–¥ í‘¸ë¦¬ì— ë³€í™˜
 		Mat one_row = complex.row(i);
-		Mat dft_row = DFT_1D(one_row, dir);  //1°³ Çà º¯È¯
-		dft_row.copyTo(tmp.row(i)); //ÀúÀå
+		Mat dft_row = DFT_1D(one_row, dir);  //1ê°œ í–‰ ë³€í™˜
+		dft_row.copyTo(tmp.row(i)); //ì €ì¥
 	}
 
-	transpose(tmp, tmp); //ÀüÄ¡
-	for (int i = 0; i < tmp.rows; i++) {  //¼¼·Î ¹æÇâ Çª¸®¿¡ º¯È¯
+	transpose(tmp, tmp); //ì „ì¹˜
+	for (int i = 0; i < tmp.rows; i++) {  //ì„¸ë¡œ ë°©í–¥ í‘¸ë¦¬ì— ë³€í™˜
 		Mat one_row = tmp.row(i);
 		Mat dft_row = DFT_1D(tmp.row(i), dir); 
 		dft_row.copyTo(dst.row(i));
@@ -73,13 +75,13 @@ int main() {
 	Mat image = imread("Lenna.png", 0);
 	Mat complex, dft_coef, dft_img, idft_coef, shuffle, idft_img[2];  
 	Mat tmp[] = { image, Mat::zeros(image.size(), CV_8U) };
-	merge(tmp, 2, complex); //º¹¼Ò¼ö Çà·Ä ±¸¼º
+	merge(tmp, 2, complex); //ë³µì†Œìˆ˜ í–‰ë ¬ êµ¬ì„±
 
-	DFT_2D(complex, dft_coef, 1); //2Â÷¿ø DFT
+	DFT_2D(complex, dft_coef, 1); //2ì°¨ì› DFT
 	log_mag(dft_coef, dft_img);
 	shuffling(dft_img, shuffle);
 
-	DFT_2D(dft_coef, idft_coef, -1); // Çª¸®¿¡ ¿ªº¯È¯À¸·Î ¿øº» ¿µ»ó º¹¿ø
+	DFT_2D(dft_coef, idft_coef, -1); // í‘¸ë¦¬ì— ì—­ë³€í™˜ìœ¼ë¡œ ì›ë³¸ ì˜ìƒ ë³µì›
 	split(idft_coef, idft_img);
 	idft_img[0].convertTo(idft_img[0], CV_8U);
 
