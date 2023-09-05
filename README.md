@@ -21,7 +21,7 @@ Hough, RANSAC, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능
 - [Hough_Transform](#Hough_Transform)
 - [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
 - [Otsu_이진화](#Otsu_이진화)
-- [Results](#results)
+- [DFT](#DFT(Discrete Fourier Transform) 이산 푸리에 변환)
 - [Authors](#authors)
 
 <br>
@@ -228,5 +228,30 @@ Otsu 알고리즘을 직접 구현하여 자동으로 2 개의 threshold를 찾�
 ![result](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/b4e8670c-d42d-4753-a5e7-3b3f2570e825)
 
 <br>
+
+<hr>
+
+# DFT(Discrete Fourier Transform) 이산 푸리에 변환 
+- 코드:
+  [otsu.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/otsu.cpp)
+
+Otsu 알고리즘을 직접 구현하여 자동으로 이진화 threshold를 찾고, 이진화하는 알고리즘입니다.
+
+<br>
+
+### Example
+0~255까지 밝기 구간 별로 나누어진 이미지가 들어갔을 때, 이진화 threshold를 자동으로 찾고 이진화 한 결과입니다.
+
+#### input Image
+
+![bright](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/4ab53fb5-6a64-485c-be40-a094e041dbbc)
+
+
+#### Output Image
+
+![otsu](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/d72a05df-1dc1-4d62-9590-6f0819827916)
+
+<br>
+
 
 
