@@ -37,8 +37,8 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 하나의 점을 지나는 무수한 직선의 방적식은 y=mx+c로 표현할 수 있으며, 이것을 삼각함수를 이용하여 변형하면 r = 𝑥 cos 𝜃 + 𝑦 sin 𝜃 으로 표현할 수 있습니다.
 
 허프 변환에 대한 참고자료
-- (ENG)https://docs.opencv.org/3.4/d9/db0/tutorial_hough_lines.html
-- (KOR)https://opencv-python.readthedocs.io/en/latest/doc/25.imageHoughLineTransform/imageHoughLineTransform.html
+- [ENG](https://docs.opencv.org/3.4/d9/db0/tutorial_hough_lines.html)
+- [KOR](https://opencv-python.readthedocs.io/en/latest/doc/25.imageHoughLineTransform/imageHoughLineTransform.html)
 
 <br>
 
