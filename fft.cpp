@@ -1,27 +1,29 @@
+// Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 #include <stdio.h>
 using namespace std;
 using namespace cv;
 
-void log_mag(Mat complex, Mat& dst) { //Çª¸®¿¡ º¯È¯À» ¼öÇàÇÏ¸é º¹¼Ò¼öÀÇ Çà·ÄÀÌ °á°ú·Î »ı¼º
-	Mat planes[2]; //º¹¼Ò¼öÀÇ ½Ç¼öºÎ¿Í Çã¼öºÎ¸¦ º¤ÅÍ·Î °£ÁÖ
-	split(complex, planes); //2Ã¤³Î Çà·Ä ºĞ¸®
-	magnitude(planes[0], planes[1], dst); //º¤ÅÍÀÇ Å©±â
+void log_mag(Mat complex, Mat& dst) { //í‘¸ë¦¬ì— ë³€í™˜ì„ ìˆ˜í–‰í•˜ë©´ ë³µì†Œìˆ˜ì˜ í–‰ë ¬ì´ ê²°ê³¼ë¡œ ìƒì„±
+	Mat planes[2]; //ë³µì†Œìˆ˜ì˜ ì‹¤ìˆ˜ë¶€ì™€ í—ˆìˆ˜ë¶€ë¥¼ ë²¡í„°ë¡œ ê°„ì£¼
+	split(complex, planes); //2ì±„ë„ í–‰ë ¬ ë¶„ë¦¬
+	magnitude(planes[0], planes[1], dst); //ë²¡í„°ì˜ í¬ê¸°
 	log(dst + 1, dst);
-	normalize(dst, dst, 0, 255, NORM_MINMAX); //Á¤±ÔÈ­(ÀúÁÖÆÄ ¿µ¿ª°ú °íÁÖÆÄ ¿µ¿ªÀÇ °è¼ö°ªÀ» Á¤±ÔÈ­)
+	normalize(dst, dst, 0, 255, NORM_MINMAX); //ì •ê·œí™”(ì €ì£¼íŒŒ ì˜ì—­ê³¼ ê³ ì£¼íŒŒ ì˜ì—­ì˜ ê³„ìˆ˜ê°’ì„ ì •ê·œí™”)
 	dst.convertTo(dst, CV_8U);
 }
 
 void shuffling(Mat mag_img, Mat& dst) {
 	int cx = mag_img.cols / 2;
 	int cy = mag_img.rows / 2;
-	Rect q1(cx, 0, cx, cy); //1»çºĞ¸é
+	Rect q1(cx, 0, cx, cy); //1ì‚¬ë¶„ë©´
 	Rect q2(0, 0, cx, cy); //2
 	Rect q3(0, cy, cx, cy); //3
 	Rect q4(cx, cy, cx, cy); //4
 
 	dst = Mat(mag_img.size(), mag_img.type());
-	mag_img(q1).copyTo(dst(q3)); //»çºĞ¸é ¸Â¹Ù²Ş
+	mag_img(q1).copyTo(dst(q3)); //ì‚¬ë¶„ë©´ ë§ë°”ê¿ˆ
 	mag_img(q3).copyTo(dst(q1));
 	mag_img(q2).copyTo(dst(q4));
 	mag_img(q4).copyTo(dst(q2));
