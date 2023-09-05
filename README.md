@@ -233,25 +233,33 @@ Otsu 알고리즘을 직접 구현하여 자동으로 2 개의 threshold를 찾�
 
 # DFT
 - 코드:
-  [otsu.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/otsu.cpp)
+  [dft.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/dft.cpp)
 
-(Discrete Fourier Transform)_이산_푸리에_변환 
+DFT란 Discrete Fourier Transform(이산 푸리에 변환)의 약자이다.
+
+#### DFT(Discrete Fourier Transform), 이산 푸리에 변환에 대한 참고 자료
+- https://hsyaloe.tistory.com/31
 
 <br>
 
 ### Example
-0~255까지 밝기 구간 별로 나누어진 이미지가 들어갔을 때, 이진화 threshold를 자동으로 찾고 이진화 한 결과입니다.
+입력 영상을 DFT 하여 주파수 영역으로 변환 후, 이를 다시 역변환하여 원본 이미지로 변환하는 예시입니다.
 
 #### input Image
 
-![bright](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/4ab53fb5-6a64-485c-be40-a094e041dbbc)
+![Lenna](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/441e61ee-d1ca-4162-bb41-bbdfe2aac2e7)
 
 
-#### Output Image
+#### 주파수 영역 이미지
 
-![otsu](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/d72a05df-1dc1-4d62-9590-6f0819827916)
+![dft](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/b75241e2-f66c-448d-abd7-a41291a90ad9)
+
+#### 역변환 이미지
+
+![idft_img](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/19928961-a013-4781-a719-6b45d52dd616)
+
 
 <br>
 
-
+<hr>
 
