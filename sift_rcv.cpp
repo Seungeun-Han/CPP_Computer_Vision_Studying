@@ -1,3 +1,5 @@
+// Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include "precomp.hpp"
@@ -10,12 +12,12 @@
 using namespace std;
 using namespace cv;
 
-// Å¬·¡½º Á¤ÀÇ
+// í´ë˜ìŠ¤ ì •ì˜
 class SIFT_hse : public Feature2D {
 public:
     explicit SIFT_hse(int nfeatures = 0, int nOctaveLayers = 3,
         double contrastThreshold = 0.04, double edgeThreshold = 10,
-        double sigma = 1.6, int descriptorType = CV_32F); //¿øÄ¡ ¾Ê´Â Çüº¯È¯ ¹æÁö
+        double sigma = 1.6, int descriptorType = CV_32F); //ì›ì¹˜ ì•ŠëŠ” í˜•ë³€í™˜ ë°©ì§€
 
     //! finds the keypoints and computes descriptors for them using SIFT algorithm.
     //! Optionally it can compute descriptors for the user-provided keypoints
@@ -39,8 +41,8 @@ public:
     }
 
 protected:
-    int nfeatures;  //feature °³¼ö
-    int nOctaveLayers; //¿ÁÅ¸ºê °³¼ö
+    int nfeatures;  //feature ê°œìˆ˜
+    int nOctaveLayers; //ì˜¥íƒ€ë¸Œ ê°œìˆ˜
     double contrastThreshold; //k
     double edgeThreshold; 
     double sigma;
@@ -54,24 +56,24 @@ SIFT_hse::SIFT_hse(int _nfeatures, int _nOctaveLayers,
 {
 }
 
-// Åä´ë ¿µ»ó »ı¼º ¹× °¡¿ì½Ã¾È ºí·¯¸µ
+// í† ëŒ€ ì˜ìƒ ìƒì„± ë° ê°€ìš°ì‹œì•ˆ ë¸”ëŸ¬ë§
 static Mat createInitialImage(const Mat& img, bool doubleImageSize, float sigma){ 
     Mat gray, gray_fpt;
-    if (img.channels() == 3 || img.channels() == 4) //ÄÃ·¯¸é
+    if (img.channels() == 3 || img.channels() == 4) //ì»¬ëŸ¬ë©´
     {
-        cvtColor(img, gray, COLOR_BGR2GRAY); //±×·¹ÀÌ½ºÄÉÀÏ
-        gray.convertTo(gray_fpt, DataType<float>::type); //float À¸·Î
+        cvtColor(img, gray, COLOR_BGR2GRAY); //ê·¸ë ˆì´ìŠ¤ì¼€ì¼
+        gray.convertTo(gray_fpt, DataType<float>::type); //float ìœ¼ë¡œ
     }
     else
-        img.convertTo(gray_fpt, DataType<float>::type); //float À¸·Î
+        img.convertTo(gray_fpt, DataType<float>::type); //float ìœ¼ë¡œ
 
     float sig_diff;
 
-    if (doubleImageSize){ //-1¿ÁÅ¸ºê ¸¸µç´Ù¸é -> ¹İº¹¼º Å©°Ô Çâ»ó
-        sig_diff = sqrtf(sigma * sigma - 0.5f * 0.5f * 4); //Åä´ë ¿µ»óÀº ·çÆ®(1.6^2-0.5^2)À¸·Î °¡¿ì½Ã¾Èºí·¯¸µ
+    if (doubleImageSize){ //-1ì˜¥íƒ€ë¸Œ ë§Œë“ ë‹¤ë©´ -> ë°˜ë³µì„± í¬ê²Œ í–¥ìƒ
+        sig_diff = sqrtf(sigma * sigma - 0.5f * 0.5f * 4); //í† ëŒ€ ì˜ìƒì€ ë£¨íŠ¸(1.6^2-0.5^2)ìœ¼ë¡œ ê°€ìš°ì‹œì•ˆë¸”ëŸ¬ë§
         Mat doubled;
 
-        resize(gray_fpt, doubled, Size(gray_fpt.cols * 2, gray_fpt.rows * 2), 0, 0, INTER_LINEAR); // °¡·Î ¼¼·Î 2¹è
+        resize(gray_fpt, doubled, Size(gray_fpt.cols * 2, gray_fpt.rows * 2), 0, 0, INTER_LINEAR); // ê°€ë¡œ ì„¸ë¡œ 2ë°°
 
         Mat result;
         GaussianBlur(doubled, result, Size(), sig_diff, sig_diff);
@@ -85,12 +87,12 @@ static Mat createInitialImage(const Mat& img, bool doubleImageSize, float sigma)
     }
 }
 
-//°¡¿ì½Ã¾È ÇÇ¶ó¹Ìµå
+//ê°€ìš°ì‹œì•ˆ í”¼ë¼ë¯¸ë“œ
 void SIFT_hse::buildGaussianPyramid(const Mat& base, vector<Mat>& pyr, int nOctaves) {
     vector<double> sig(nOctaveLayers + 3);
     pyr.resize(nOctaves * (nOctaveLayers + 3));
 
-    // ½Ã±×¸¶ ¹Ì¸® °è»ê
+    // ì‹œê·¸ë§ˆ ë¯¸ë¦¬ ê³„ì‚°
     sig[0] = sigma;
     double k = pow(2., 1. / nOctaveLayers);
     for (int i = 1; i < nOctaveLayers + 3; i++){
@@ -103,20 +105,20 @@ void SIFT_hse::buildGaussianPyramid(const Mat& base, vector<Mat>& pyr, int nOcta
         for (int i = 0; i < nOctaveLayers + 3; i++){
             Mat& dst = pyr[o * (nOctaveLayers + 3) + i];
             if (o == 0 && i == 0)
-                dst = base; //¸Ç ¾Æ·¡ ÇÇ¶ó¹Ìµå´Â Åä´ë ¿µ»ó
+                dst = base; //ë§¨ ì•„ë˜ í”¼ë¼ë¯¸ë“œëŠ” í† ëŒ€ ì˜ìƒ
             else if (i == 0){
                 const Mat& src = pyr[(o - 1) * (nOctaveLayers + 3) + nOctaveLayers];
-                resize(src, dst, Size(src.cols / 2, src.rows / 2), 0, 0, INTER_NEAREST);  //¿ÁÅ¸ºê ¿Ã¶ó°¥ ¶§ °¡·Î¼¼·Î 1/2 Åä´ë ¿µ»ó »ı¼º
+                resize(src, dst, Size(src.cols / 2, src.rows / 2), 0, 0, INTER_NEAREST);  //ì˜¥íƒ€ë¸Œ ì˜¬ë¼ê°ˆ ë•Œ ê°€ë¡œì„¸ë¡œ 1/2 í† ëŒ€ ì˜ìƒ ìƒì„±
             }
             else{
                 const Mat& src = pyr[o * (nOctaveLayers + 3) + i - 1];
-                GaussianBlur(src, dst, Size(), sig[i], sig[i]); //¹Ì¸® °è»êÇÑ ½Ã±×¸¶·Î °¡¿ì½Ã¾È ºí·¯¸µ
+                GaussianBlur(src, dst, Size(), sig[i], sig[i]); //ë¯¸ë¦¬ ê³„ì‚°í•œ ì‹œê·¸ë§ˆë¡œ ê°€ìš°ì‹œì•ˆ ë¸”ëŸ¬ë§
             }
         }
     }
 }
 
-class buildDoGPyramidComputer : public ParallelLoopBody{ //DOG ÇÇ¶ó¹Ìµå: °¡¿ì½Ã¾È ¿µ»ó »©±â
+class buildDoGPyramidComputer : public ParallelLoopBody{ //DOG í”¼ë¼ë¯¸ë“œ: ê°€ìš°ì‹œì•ˆ ì˜ìƒ ë¹¼ê¸°
     public:
         buildDoGPyramidComputer(
             int _nOctaveLayers,
@@ -143,19 +145,19 @@ class buildDoGPyramidComputer : public ParallelLoopBody{ //DOG ÇÇ¶ó¹Ìµå: °¡¿ì½Ã¾
 
     private:
         int nOctaveLayers;
-        const vector<Mat>& gpyr; //°¡¿ì½Ã¾È ÇÇ¶ó¹Ìµå
-        vector<Mat>& dogpyr; //DOG ÇÇ¶ó¹Ìµå
+        const vector<Mat>& gpyr; //ê°€ìš°ì‹œì•ˆ í”¼ë¼ë¯¸ë“œ
+        vector<Mat>& dogpyr; //DOG í”¼ë¼ë¯¸ë“œ
  };
 
 void SIFT_hse::buildDoGPyramid(const vector<Mat>&gpyr, vector<Mat>&dogpyr) const{
     int nOctaves = (int)gpyr.size() / (nOctaveLayers + 3);
     dogpyr.resize(nOctaves * (nOctaveLayers + 2));
 
-    //º´·Ä·Î °è»ê
+    //ë³‘ë ¬ë¡œ ê³„ì‚°
     parallel_for_(Range(0, nOctaves * (nOctaveLayers + 2)), buildDoGPyramidComputer(nOctaveLayers, gpyr, dogpyr));
 }
 
-//±ØÁ¡ Ã£±â Å¬·¡½º
+//ê·¹ì  ì°¾ê¸° í´ë˜ìŠ¤
 class findScaleSpaceExtremaComputer : public ParallelLoopBody {
     public:
         findScaleSpaceExtremaComputer(
@@ -188,7 +190,7 @@ class findScaleSpaceExtremaComputer : public ParallelLoopBody {
         void operator()(const Range& range) const {
             vector<KeyPoint>& kpts = tls_kpts_struct.getRef(); // Get data associated with key
 
-            //¸Ş¼Òµå È£Ãâ
+            //ë©”ì†Œë“œ í˜¸ì¶œ
             findScaleSpaceExtrema(o, i, threshold, idx, step, cols, nOctaveLayers, contrastThreshold, edgeThreshold, sigma, gauss_pyr, dog_pyr, kpts, range);
         }
     private:
@@ -205,7 +207,7 @@ class findScaleSpaceExtremaComputer : public ParallelLoopBody {
 };
 
 // Bad features are discarded based on contrast and ratio of principal curvatures.
-// ±ØÁ¡ °ËÃâ ¸Ş¼Òµå
+// ê·¹ì  ê²€ì¶œ ë©”ì†Œë“œ
 void SIFT_hse::findScaleSpaceExtrema(const vector<Mat>& gauss_pyr, const vector<Mat>& dog_pyr,
     vector<KeyPoint>& keypoints) const {
     const int nOctaves = (int)gauss_pyr.size() / (nOctaveLayers + 3);
@@ -294,7 +296,7 @@ static void calcDescriptors(const vector<Mat>& gpyr, const vector<KeyPoint>& key
     parallel_for_(Range(0, static_cast<int>(keypoints.size())), calcDescriptorsComputer(gpyr, keypoints, descriptors, nOctaveLayers, firstOctave));
 }
 
-//SIFT ¾Ë°í¸®Áò ÀüÃ¼ ½ÇÇà
+//SIFT ì•Œê³ ë¦¬ì¦˜ ì „ì²´ ì‹¤í–‰
 void SIFT_hse::detectAndCompute(Mat _image, vector<KeyPoint>& keypoints, OutputArray _descriptors, bool useProvidedKeypoints) {
     int firstOctave = -1, actualNOctaves = 0, actualNLayers = 0;
     Mat image = _image;
@@ -364,7 +366,7 @@ int main(int argc, char** argv) {
     double edgeThreshold = 10;
 	double sigma = 1.6;
 
-    //¶óÀÌºê·¯¸®
+    //ë¼ì´ë¸ŒëŸ¬ë¦¬
 	Ptr<SIFT>  siftPtr = SIFT::create(0, Octave, k, edgeThreshold, sigma);
 	vector<KeyPoint> keypoints;
 	siftPtr->detect(image, keypoints);
