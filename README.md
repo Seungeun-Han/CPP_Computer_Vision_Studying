@@ -1,6 +1,8 @@
 # CPP_Computer_Vision_Studying
 
-22.01 ~ 22.06 / hse@etri.re.kr
+22.01 ~ 22.06 
+
+<br>
 
 C++ 을 이용하여 전통적인 영상 처리 알고리즘을 직접 코딩하였습니다. 
 
