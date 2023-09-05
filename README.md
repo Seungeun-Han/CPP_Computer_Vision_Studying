@@ -265,7 +265,7 @@ DFT란 Discrete Fourier Transform(이산 푸리에 변환)의 약자이다. 이�
 
 # PCA
 - 코드:
-  [pca.cpp]
+  [pca.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/pca.cpp)
 
 PCA에 대한 자세한 설명은 아래의 블로그에 명시했습니다.
 
