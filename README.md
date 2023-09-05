@@ -6,7 +6,7 @@
 
 C++ 을 이용하여 전통적인 영상 처리 알고리즘을 직접 코딩하였습니다. 
 
-Hough, RANSAC, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 기를 수 있었습니다.
+RANSAC, Hough, PCA, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 기를 수 있었습니다.
 
 <br>
 
@@ -22,7 +22,7 @@ Hough, RANSAC, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능
 - [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
 - [Otsu_이진화](#Otsu_이진화)
 - [DFT(Discrete Fourier Transform), 이산 푸리에 변환](#DFT)
-- [Authors](#authors)
+- [PCA](#PCA)
 
 <br>
 
@@ -235,7 +235,7 @@ Otsu 알고리즘을 직접 구현하여 자동으로 2 개의 threshold를 찾�
 - 코드:
   [dft.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/dft.cpp)
 
-DFT란 Discrete Fourier Transform(이산 푸리에 변환)의 약자이다.
+DFT란 Discrete Fourier Transform(이산 푸리에 변환)의 약자이다. 이에 대한 자세한 설명은 아래의 블로그에 명시했습니다.
 
 #### DFT(Discrete Fourier Transform), 이산 푸리에 변환에 대한 참고 자료
 - https://hsyaloe.tistory.com/31
@@ -262,4 +262,50 @@ DFT란 Discrete Fourier Transform(이산 푸리에 변환)의 약자이다.
 <br>
 
 <hr>
+
+# PCA
+- 코드:
+  [pca.cpp]
+
+PCA에 대한 자세한 설명은 아래의 블로그에 명시했습니다.
+
+#### PCA에 대한 참고 자료
+- [https://hsyaloe.tistory.com/31](https://hsyaloe.tistory.com/30)
+
+<br>
+
+### Example
+PCA를 이용하여 3개의 고유 얼굴(Eigenface)을 구하는 예시는 다음과 같습니다.
+
+#### input Image
+
+[TFD_expression] 데이터셋으로부터 총 10개의 얼굴 영상을 임의로 발췌했습니다.
+(저작권상 공개가 불가한 점 양해 부탁드립니다.)
+
+그 결과 PCA를 통해 도출된 3 개의 Eigenface는 다음과 같습니다.
+
+
+#### RANK1
+
+![rank1](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/41926cc2-947d-4717-a244-55f8926a4657)
+
+
+#### RANK2
+
+![rank2](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/f4d022b2-d745-4f1f-9736-e50813e9ebb4)
+
+
+#### RANK3
+
+![rank3](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/957531b2-f0a7-459e-9291-cf5b2ef0a7e6)
+
+
+
+<br>
+
+<hr>
+
+
+
+
 
