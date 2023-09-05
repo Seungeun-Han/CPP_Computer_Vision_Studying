@@ -69,7 +69,7 @@ input image는 고속도로 이미지입니다. 우리는 허프 변환을 통�
 
 ![all_the_lines](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/7ba6970c-8eb3-4ccb-9e68-926f03c04d0f)
 
-이 중에서 직선의 기울기가 0~50도, 120~140도 이며, 가장 유력한 10개를 찾은 결과는 아래와 같습니다.
+이 중에서 직선의 기울기가 0\~50도, 120\~140도 이며, 가장 유력한 10개를 찾은 결과는 아래와 같습니다.
 
 #### Top 10
 
