@@ -329,19 +329,18 @@ PCA를 이용하여 3개의 고유 얼굴(Eigenface)을 구하는 예시는 다�
 
 ![dft](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/b75241e2-f66c-448d-abd7-a41291a90ad9)
 
-#### 고주파수 필터링 마스크
+#### 고주파수 필터링 이미지
 
-![highpass_filter](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/9e711d4b-30ba-40e8-b974-076bf3d105a1)
-
+![high_dft](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/86ebeee1-11ed-4559-9775-33b8a23db8d8)
 
 #### 고주파수 필터링 역변환 이미지
 
 ![high_passed_img](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/263ef3ae-4cfc-4f3c-9e46-97a6aae64856)
 
 
-#### 저주파수 필터링 마스크
+#### 저주파수 필터링 이미지
 
-![lowpass_filter](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/7b9be849-07be-40ce-8f96-80309293929b)
+![low_dft](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/bce48304-aca7-4a21-a6fe-e958a7e2e393)
 
 
 #### 저주파수 필터링 역변환 이미지
