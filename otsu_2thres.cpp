@@ -1,3 +1,5 @@
+// Copyright (c) 한승은. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 #include <math.h>
 using namespace std;
