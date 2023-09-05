@@ -26,8 +26,8 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 <hr>
 
 # Hough_Transform
-- 코드
-  hough.cpp
+- 코드:
+  [hough.cpp]()
 
 ## Hough Transform(허프 변환) 이란?
 허프변환은 이미지에서 모양을 찾는 가장 유명한 방법입니다. 
