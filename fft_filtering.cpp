@@ -1,45 +1,47 @@
+// Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 using namespace std;
 using namespace cv;
 
-void log_mag(Mat complex, Mat& dst) { //Çª¸®¿¡ º¯È¯À» ¼öÇàÇÏ¸é º¹¼Ò¼öÀÇ Çà·ÄÀÌ °á°ú·Î »ı¼º
-	Mat planes[2]; //º¹¼Ò¼öÀÇ ½Ç¼öºÎ¿Í Çã¼öºÎ¸¦ º¤ÅÍ·Î °£ÁÖ
-	split(complex, planes); //2Ã¤³Î Çà·Ä ºĞ¸®
-	magnitude(planes[0], planes[1], dst); //º¤ÅÍÀÇ Å©±â
+void log_mag(Mat complex, Mat& dst) { //í‘¸ë¦¬ì— ë³€í™˜ì„ ìˆ˜í–‰í•˜ë©´ ë³µì†Œìˆ˜ì˜ í–‰ë ¬ì´ ê²°ê³¼ë¡œ ìƒì„±
+	Mat planes[2]; //ë³µì†Œìˆ˜ì˜ ì‹¤ìˆ˜ë¶€ì™€ í—ˆìˆ˜ë¶€ë¥¼ ë²¡í„°ë¡œ ê°„ì£¼
+	split(complex, planes); //2ì±„ë„ í–‰ë ¬ ë¶„ë¦¬
+	magnitude(planes[0], planes[1], dst); //ë²¡í„°ì˜ í¬ê¸°
 	log(dst + 1, dst);
-	normalize(dst, dst, 0, 255, NORM_MINMAX); //Á¤±ÔÈ­(ÀúÁÖÆÄ ¿µ¿ª°ú °íÁÖÆÄ ¿µ¿ªÀÇ °è¼ö°ªÀ» Á¤±ÔÈ­)
+	normalize(dst, dst, 0, 255, NORM_MINMAX); //ì •ê·œí™”(ì €ì£¼íŒŒ ì˜ì—­ê³¼ ê³ ì£¼íŒŒ ì˜ì—­ì˜ ê³„ìˆ˜ê°’ì„ ì •ê·œí™”)
 	dst.convertTo(dst, CV_8U);
 }
 
 void shuffling(Mat mag_img, Mat& dst) {
 	int cx = mag_img.cols / 2;
 	int cy = mag_img.rows / 2;
-	Rect q1(cx, 0, cx, cy); //1»çºĞ¸é
+	Rect q1(cx, 0, cx, cy); //1ì‚¬ë¶„ë©´
 	Rect q2(0, 0, cx, cy); //2
 	Rect q3(0, cy, cx, cy); //3
 	Rect q4(cx, cy, cx, cy); //4
 
 	dst = Mat(mag_img.size(), mag_img.type());
-	mag_img(q1).copyTo(dst(q3)); //»çºĞ¸é ¸Â¹Ù²Ş
+	mag_img(q1).copyTo(dst(q3)); //ì‚¬ë¶„ë©´ ë§ë°”ê¿ˆ
 	mag_img(q3).copyTo(dst(q1));
 	mag_img(q2).copyTo(dst(q4));
 	mag_img(q4).copyTo(dst(q2));
 }
 
-Mat zeropadding(Mat img) {  // ÀÔ·Â ¿µ»ó¿¡ ¿µ»ğÀÔÀ» ¼öÇàÇØ¼­ ¹İÈ¯ÇÏ´Â ÇÔ¼ö
-	int m = 1 << (int)ceil(log2(img.rows));  // 2ÀÇ ÀÚ½Â °è½Ñ
+Mat zeropadding(Mat img) {  // ì…ë ¥ ì˜ìƒì— ì˜ì‚½ì…ì„ ìˆ˜í–‰í•´ì„œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+	int m = 1 << (int)ceil(log2(img.rows));  // 2ì˜ ììŠ¹ ê³„ì‹¼
 	int n = 1 << (int)ceil(log2(img.cols));
 	Mat dst(m, n, img.type(), Scalar(0));
 
-	Rect rect(Point(0, 0), img.size());  // ¿øº» ¿µ»ó Å©±â °ü½É ¿µ¿ª
-	img.copyTo(dst(rect));  // ¿øº» ¿µ»óÀ» °ü½É ¿µ¿ª¿¡ º¹»ç
+	Rect rect(Point(0, 0), img.size());  // ì›ë³¸ ì˜ìƒ í¬ê¸° ê´€ì‹¬ ì˜ì—­
+	img.copyTo(dst(rect));  // ì›ë³¸ ì˜ìƒì„ ê´€ì‹¬ ì˜ì—­ì— ë³µì‚¬
 	dst.convertTo(dst, CV_32F);
 	return dst;
 }
 
-Mat get_lowpassFilter(Size size, int radius) {  // ÀúÁÖÆÄ Åë°ú ÇÊÅÍ »ı¼º ÇÔ¼ö
-	Point center = size / 2;  // Áß½ÉÁ¡ °³¼±
-	Mat filter(size, CV_32FC2, Vec2f(0, 0));  // 2Ã¤³Î Çà·Ä ¼±¾ğ
+Mat get_lowpassFilter(Size size, int radius) {  // ì €ì£¼íŒŒ í†µê³¼ í•„í„° ìƒì„± í•¨ìˆ˜
+	Point center = size / 2;  // ì¤‘ì‹¬ì  ê°œì„ 
+	Mat filter(size, CV_32FC2, Vec2f(0, 0));  // 2ì±„ë„ í–‰ë ¬ ì„ ì–¸
 	circle(filter, center, radius, Vec2f(1, 1), -1);
 	/*Mat filter2(size, CV_8UC1, Scalar(0));
 	circle(filter2, center, radius, Scalar(255), -1);
@@ -47,7 +49,7 @@ Mat get_lowpassFilter(Size size, int radius) {  // ÀúÁÖÆÄ Åë°ú ÇÊÅÍ »ı¼º ÇÔ¼ö
 	return filter;
 }
 
-Mat get_highpassFilter(Size size, int radius) {  // °íÁÖÆÄ Åë°ú ÇÊÅÍ »ı¼º ÇÔ¼ö
+Mat get_highpassFilter(Size size, int radius) {  // ê³ ì£¼íŒŒ í†µê³¼ í•„í„° ìƒì„± í•¨ìˆ˜
 	Point center = size / 2;
 	Mat filter(size, CV_32FC2, Vec2f(1, 1));  
 	circle(filter, center, radius, Vec2f(0, 0), -1);  
@@ -61,13 +63,13 @@ void FFT(Mat image, Mat& dft_coef, Mat& dft_img) {
 	Mat complex_img;
 	Mat pad_img = zeropadding(image);
 	Mat tmp[] = { pad_img, Mat::zeros(pad_img.size(), pad_img.type()) };
-	merge(tmp, 2, complex_img);  // º¹¼Ò Çà·Ä ±¸¼º
+	merge(tmp, 2, complex_img);  // ë³µì†Œ í–‰ë ¬ êµ¬ì„±
 	dft(complex_img, dft_coef, 0);
 	shuffling(dft_coef, dft_coef);
-	log_mag(dft_coef, dft_img);  // ÁÖÆÄ¼ö ½ºÆåÆ®·³ ¿µ»ó
+	log_mag(dft_coef, dft_img);  // ì£¼íŒŒìˆ˜ ìŠ¤í™íŠ¸ëŸ¼ ì˜ìƒ
 }
 
-Mat IFFT(Mat dft_coef, Size size) { // ¿ªDFT
+Mat IFFT(Mat dft_coef, Size size) { // ì—­DFT
 	Mat idft_coef, idft_img[2];
 	shuffling(dft_coef, dft_coef);
 	dft(dft_coef, idft_coef, DFT_INVERSE+DFT_SCALE);
@@ -83,13 +85,13 @@ int main() {
 	Rect img_rect(Point(0, 0), image.size());
 	Mat dft_coef, dft_img, low_dft, high_dft, filtered_mat1, filtered_mat2;
 
-	FFT(image, dft_coef, dft_img);  //FFT ¼öÇà
-	Mat low_filter = get_lowpassFilter(dft_coef.size(), 50);  // ÀúÁÖÆÄ ÇÊÅÍ »ı¼º
-	Mat high_filter = get_highpassFilter(dft_coef.size(), 20);  // °íÁÖÆÄ ÇÊÅÍ »ı¼º
+	FFT(image, dft_coef, dft_img);  //FFT ìˆ˜í–‰
+	Mat low_filter = get_lowpassFilter(dft_coef.size(), 50);  // ì €ì£¼íŒŒ í•„í„° ìƒì„±
+	Mat high_filter = get_highpassFilter(dft_coef.size(), 20);  // ê³ ì£¼íŒŒ í•„í„° ìƒì„±
 
-	multiply(dft_coef, low_filter, filtered_mat1);  //ÇÊÅÍ¸µ
+	multiply(dft_coef, low_filter, filtered_mat1);  //í•„í„°ë§
 	multiply(dft_coef, high_filter, filtered_mat2);
-	log_mag(filtered_mat1, low_dft);  // ÁÖÆÄ¼ö ½ºÆåÆ®·³ »ı¼º
+	log_mag(filtered_mat1, low_dft);  // ì£¼íŒŒìˆ˜ ìŠ¤í™íŠ¸ëŸ¼ ìƒì„±
 	log_mag(filtered_mat2, high_dft);
 
 	imshow("image", image);
