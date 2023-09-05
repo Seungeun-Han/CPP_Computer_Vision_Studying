@@ -24,6 +24,7 @@ RANSAC, Hough, PCA, SIFT 등 중요한 알고리즘을 이해하고, 구현하�
 - [DFT(Discrete Fourier Transform), 이산 푸리에 변환](#DFT)
 - [고주파, 저주파 필터링](#FFT_Filtering)
 - [PCA](#PCA)
+- [Harris Corner Detection](#Harris_Corner_Detect)
 
 <br>
 
@@ -352,5 +353,29 @@ PCA를 이용하여 3개의 고유 얼굴(Eigenface)을 구하는 예시는 다�
 
 <hr>
 
+# Harris_Corner_Detect
+- 코드:
+  [harris_detect.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/harris_detect.cpp)
 
+
+#### Harris Corner 검출에 대한 참고 자료
+- [이론설명](https://medium.com/data-breach/introduction-to-harris-corner-detector-32a88850b3f6)
+- [OpenCV](https://docs.opencv.org/3.4/dc/d0d/tutorial_py_features_harris.html)
+
+<br>
+
+### Example
+
+#### Input Image
+
+![box](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/c728a1d0-a2ec-4935-be44-9e58898668a8)
+
+
+#### Output Image
+
+![harris_corner](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/c3f3ebec-391f-4107-ae38-e8abc978433a)
+
+<br>
+
+<hr>
 
