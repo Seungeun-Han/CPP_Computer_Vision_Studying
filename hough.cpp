@@ -1,29 +1,31 @@
+// Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 using namespace std;
 using namespace cv;
 
 void hough_coord(Mat image, Mat& acc_mat, double rho, double theta) {
-	int acc_h = (image.rows + image.cols) * 2 / rho;  //´©ÀûÇà·Ä ³ôÀÌ
-	int acc_w = CV_PI / theta;  //´©ÀûÇà·Ä ³Êºñ
-	acc_mat = Mat(acc_h, acc_w, CV_32S, Scalar(0));  //ÇãÇÁ ´©ÀûÇà·Ä ¼±¾ğ
+	int acc_h = (image.rows + image.cols) * 2 / rho;  //ëˆ„ì í–‰ë ¬ ë†’ì´
+	int acc_w = CV_PI / theta;  //ëˆ„ì í–‰ë ¬ ë„ˆë¹„
+	acc_mat = Mat(acc_h, acc_w, CV_32S, Scalar(0));  //í—ˆí”„ ëˆ„ì í–‰ë ¬ ì„ ì–¸
 
 	for (int y = 0; y < image.rows; y++) {
 		for (int x = 0; x < image.cols; x++) {
 			Point pt(x, y);
 			if (image.at<uchar>(pt) > 0) { 
-				/*for (int t = 0; t < acc_w; t++) {  //0~180µµ ¹İº¹
+				/*for (int t = 0; t < acc_w; t++) {  //0~180ë„ ë°˜ë³µ
 					double radian = t * theta;
 					float r = pt.x * cos(radian) + pt.y * sin(radian);
 					r = cvRound(r / rho + acc_mat.rows / 2);
 					acc_mat.at<int>(r, t)++;
 				}*/
-				for (int t = 0; t < 51; t++) {  //0~50µµ
+				for (int t = 0; t < 51; t++) {  //0~50ë„
 					double radian = t * theta;
 					float r = pt.x * cos(radian) + pt.y * sin(radian);
 					r = cvRound(r / rho + acc_mat.rows / 2);
 					acc_mat.at<int>(r, t)++;
 				}
-				for (int t = 120; t < 141; t++) {  //120~140µµ
+				for (int t = 120; t < 141; t++) {  //120~140ë„
 					double radian = t * theta;
 					float r = pt.x * cos(radian) + pt.y * sin(radian);
 					r = cvRound(r / rho + acc_mat.rows / 2);
@@ -126,7 +128,7 @@ void draw_houghLines(Mat image, Mat src, Mat& dst, vector<Vec2f> lines, int nlin
 
 int main() {
 	Mat image = imread("highway.jpg", IMREAD_GRAYSCALE);
-	double rho = 1, theta = CV_PI / 180;  //rho:°Å¸®°£°İ, theta:°¢µµ°£°İ
+	double rho = 1, theta = CV_PI / 180;  //rho:ê±°ë¦¬ê°„ê²©, theta:ê°ë„ê°„ê²©
 	Mat canny;
 	Mat dst1(image.size(), CV_8UC3, Scalar(0, 0, 0));
 	Mat dst2(image.size(), CV_8UC3, Scalar(0, 0, 0));
