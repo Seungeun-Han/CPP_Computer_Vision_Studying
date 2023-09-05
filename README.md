@@ -12,12 +12,13 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 
 구체적인 구현 설명은 line-by-line 주석으로 명시하였습니다.
 
-
 대표적인 알고리즘에 대한 목차는 다음과 같습니다.
+
+<br>
 
 ## Table of Contents
 - [Hough_Transform](#Hough_Transform)
-- [Data](#data)
+- [Labeling](#Labeling)
 - [Training](#training)
 - [Inference](#inference)
 - [Results](#results)
@@ -77,5 +78,28 @@ input image는 고속도로 이미지입니다. 우리는 허프 변환을 통�
 
 ![top10](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/9664cd15-5db5-4695-bd42-3b3094f3fd63)
 
+
+<hr>
+
+# Labeling_using_EQ_Table
+- 코드:
+  [Labeling_using_EQ_Table.cpp][([https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/hough.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/labeling.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/Labeling_using_EQ_Table.cpp))
+
+입력 이미지에서 자동적으로 segment들(나눠진 부분들)을 찾아 각각 다른 레이블을 붙이는 알고리즘입니다.
+
+<br>
+
+### Example
+input image 에는 "영상처리 연습 한승은" 이라는 글자가 써있습니다.
+
+#### input Image
+
+![letter](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/9fe978db-3dd1-4f28-ad29-6295a05fc47d)
+
+EQ Table을 이용해 한글의 각 자음 모음을 자동으로 segment하고, 각각의 segment들에게 다른 색상을 부여한 결과는 다음과 같습니다.
+
+#### Output Image
+
+![tmp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/assets/101082685/ca976fc9-8177-4141-b8d6-17fbb7490068)
 
 
