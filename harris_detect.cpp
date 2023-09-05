@@ -1,3 +1,5 @@
+// Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 using namespace std;
 using namespace cv;
@@ -60,7 +62,7 @@ void cornerharris(Mat image, Mat& corner, int bsize, int ksize, double k) {
 
 	//Sobel(image, dx, CV_32F, 1, 0, ksize);  
 	//Sobel(image, dy, CV_32F, 0, 1, ksize);
-	multiply(dx, dx, dxx);  //Çà·Ä ¿ø¼Ò°£ °ö °è»ê -> ¹ÌºĞ Çà·Ä Á¦°ö
+	multiply(dx, dx, dxx);  //í–‰ë ¬ ì›ì†Œê°„ ê³± ê³„ì‚° -> ë¯¸ë¶„ í–‰ë ¬ ì œê³±
 	multiply(dy, dy, dyy);
 	multiply(dx, dy, dxy);
 
@@ -83,7 +85,7 @@ void draw_corner(Mat corner, Mat& image, float thresh) {
 	int cnt = 0;
 	normalize(corner, corner, 0, 100, NORM_MINMAX, CV_32F, Mat());
 
-	for (int i = 1; i < corner.rows-1; i++) {  //ºñÃÖ´ë ¾ïÁ¦
+	for (int i = 1; i < corner.rows-1; i++) {  //ë¹„ìµœëŒ€ ì–µì œ
 		for (int j = 1; j < corner.cols-1; j++) {
 			float cur = corner.at<float>(i, j);
 			
@@ -100,17 +102,17 @@ void draw_corner(Mat corner, Mat& image, float thresh) {
 			}
 		}
 	}
-	cout << "Æ¯Â¡Á¡ °³¼ö: " << cnt << endl;
+	cout << "íŠ¹ì§•ì  ê°œìˆ˜: " << cnt << endl;
 }
 
 int main() {
 	Mat image = imread("fig.jpg", IMREAD_COLOR);  //figures.jpg  //figures2.jpg 
 	Mat dst(image.size(), image.type(), Scalar(0));
 	image.copyTo(dst);
-	int blocksize = 4; //ÀÌ¿ôÈ­¼Ò ¹üÀ§
-	int apertureSize = 3; //¼Òº§ ¸¶½ºÅ© Å©±â
-	double k = 0.04; //ÀûÀıÇÑ °ÍÀ¸·Î ¾Ë·ÁÁü
-	float thresh = 30.0; //ÄÚ³Ê ÀÓ°è°ª
+	int blocksize = 4; //ì´ì›ƒí™”ì†Œ ë²”ìœ„
+	int apertureSize = 3; //ì†Œë²¨ ë§ˆìŠ¤í¬ í¬ê¸°
+	double k = 0.04; //ì ì ˆí•œ ê²ƒìœ¼ë¡œ ì•Œë ¤ì§
+	float thresh = 30.0; //ì½”ë„ˆ ì„ê³„ê°’
 	Mat gray, corner;
 
 	cvtColor(image, gray, COLOR_BGR2GRAY);
