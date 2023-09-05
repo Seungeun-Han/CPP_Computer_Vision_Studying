@@ -18,7 +18,7 @@ Hough, SIFT 등 중요한 알고리즘을 이해하고, 구현하는 능력을 �
 
 ## Table of Contents
 - [Hough_Transform](#Hough_Transform)
-- [Labeling](#Labeling)
+- [Labeling_using_EQ_Table](#Labeling_using_EQ_Table)
 - [Training](#training)
 - [Inference](#inference)
 - [Results](#results)
