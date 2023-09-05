@@ -1,3 +1,5 @@
+# Copyright (c) í•œìŠ¹ì€. All rights reserved.
+
 #include <opencv2/opencv.hpp>
 #include <stdlib.h>
 #include <ctime>
@@ -78,8 +80,8 @@ int main() {
 
 	int label_count = 0;
 	int* eq_table = new int[image.rows * image.cols + 1];
-	/*2Â÷¿ø ¹è¿­ µ¿ÀûÇÒ´ç
-	int** eq_table = new int*[image.rows * image.cols + 1]; //0¹ø ÀÎµ¦½º´Â »ç¿ë ¾ÈÇØ¼­ +1
+	/*2ì°¨ì› ë°°ì—´ ë™ì í• ë‹¹
+	int** eq_table = new int*[image.rows * image.cols + 1]; //0ë²ˆ ì¸ë±ìŠ¤ëŠ” ì‚¬ìš© ì•ˆí•´ì„œ +1
 	for (int i = 0; i < image.rows * image.cols + 1; i++) {
 		eq_table[i] = new int[2];
 	}*/
@@ -91,7 +93,7 @@ int main() {
 					result.at<float>(i, j) = label_count;
 					eq_table[label_count] = label_count;
 				}
-				else if (i == 0 && j != 0) {  //0Çà
+				else if (i == 0 && j != 0) {  //0í–‰
 					if (otsu.at<uchar>(i, j - 1) > 0) {
 						result.at<float>(i, j) = result.at<float>(i, j - 1);
 					}
@@ -101,7 +103,7 @@ int main() {
 						eq_table[label_count] = label_count;
 					}
 				}
-				else if (i != 0 && j == 0) {  //0¿­
+				else if (i != 0 && j == 0) {  //0ì—´
 					if (otsu.at<uchar>(i - 1, j) > 0) {
 						result.at<float>(i, j) = result.at<float>(i - 1, j);
 					}
@@ -112,7 +114,7 @@ int main() {
 					}
 				}
 
-				//¼­, ºÏ¼­, ºÏ, ºÏµ¿ ´Ù ¾øÀ» ¶§
+				//ì„œ, ë¶ì„œ, ë¶, ë¶ë™ ë‹¤ ì—†ì„ ë•Œ
 				if ((i != 0 && j != 0) && otsu.at<uchar>(i - 1, j) == 0
 					&& otsu.at<uchar>(i, j - 1) == 0 && otsu.at<uchar>(i - 1, j - 1) == 0
 					&& otsu.at<uchar>(i - 1, j + 1) == 0) {
@@ -120,7 +122,7 @@ int main() {
 					result.at<float>(i, j) = label_count;
 					eq_table[label_count] = label_count;
 				}
-				else {  //±× ¿Ü
+				else {  //ê·¸ ì™¸
 					int values[4] = { 0, };
 					int n = 0;
 					if (otsu.at<uchar>(i - 1, j) > 0) {
@@ -169,7 +171,7 @@ int main() {
 		}
 	}
 	
-	/*eq table Á¤¸®*/
+	/*eq table ì •ë¦¬*/
 	for (int i = 1; i <= label_count; i++) {
 		int n = i; 
 		while (eq_table[n] != n) {
@@ -199,7 +201,7 @@ int main() {
 	cout << count << endl;*/
 
 
-	/*º¯°æµÈ eq_tableÀ» ÀÌ¿ëÇÏ¿© ´Ù½Ã labeling*/
+	/*ë³€ê²½ëœ eq_tableì„ ì´ìš©í•˜ì—¬ ë‹¤ì‹œ labeling*/
 	for (int k = 1; k <= label_count; k++) {
 		for (int i = 0; i < image.rows; i++) {
 			for (int j = 0; j < image.cols; j++) {
