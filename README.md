@@ -111,7 +111,7 @@ EQ Table을 이용해 한글의 각 자음 모음을 자동으로 segment하고,
 
 # Otsu_이진화
 - 코드:
-  [otsu.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/Labeling_using_EQ_Table.cpp)
+  [otsu.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/otsu.cpp)
 
 Otsu 알고리즘을 직접 구현하여 자동으로 이진화 threshold를 찾고, 이진화하는 알고리즘입니다.
 
@@ -133,7 +133,7 @@ Otsu 알고리즘을 직접 구현하여 자동으로 이진화 threshold를 찾
 
 # Otsu_삼진화
 - 코드:
-  [otsu_2thres.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/Labeling_using_EQ_Table.cpp)
+  [otsu_2thres.cpp](https://github.com/Seungeun-Han/CPP_Computer_Vision_Studying/blob/main/otsu_2thres.cpp)
 
 Otsu 알고리즘을 직접 구현하여 자동으로 2 개의 threshold를 찾고, 삼진화하는 알고리즘입니다.
 
